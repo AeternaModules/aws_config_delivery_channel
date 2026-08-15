@@ -24,7 +24,7 @@ output "config_delivery_channels_s3_kms_key_arn" {
 }
 output "config_delivery_channels_snapshot_delivery_properties" {
   description = "Map of snapshot_delivery_properties values across all config_delivery_channels, keyed the same as var.config_delivery_channels"
-  value       = { for k, v in aws_config_delivery_channel.config_delivery_channels : k => v.snapshot_delivery_properties if v.snapshot_delivery_properties != null && length(v.snapshot_delivery_properties) > 0 }
+  value       = { for k, v in aws_config_delivery_channel.config_delivery_channels : k => one(v.snapshot_delivery_properties) if v.snapshot_delivery_properties != null && length(v.snapshot_delivery_properties) > 0 }
 }
 output "config_delivery_channels_sns_topic_arn" {
   description = "Map of sns_topic_arn values across all config_delivery_channels, keyed the same as var.config_delivery_channels"
